@@ -42,12 +42,18 @@ class DataValue(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     data_element_id = Column(Integer, ForeignKey("data_elements.id"), nullable=False)
-    period = Column(String, nullable=False)
-    org_unit_id = Column(String, nullable=False)  # DHIS2 org unit ID
-    org_unit_name = Column(String, nullable=True)
+    org_unit_id = Column(Integer, ForeignKey("organization_units.id"), nullable=False)
+    period_id = Column(Integer, ForeignKey("periods.id"), nullable=False)
     value = Column(String, nullable=False)
+    # DHIS2 specific fields
+    dhis2_data_element_id = Column(String, nullable=False, index=True)
+    dhis2_org_unit_id = Column(String, nullable=False, index=True)
+    dhis2_period_id = Column(String, nullable=False, index=True)
+    attribute_option_combo = Column(String, nullable=True)  # DHIS2 category combinations
+    category_option_combo = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     # Relationships
     data_element = relationship("DataElement")
+    # Note: org_unit and period relationships will be added after importing the models

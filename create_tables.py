@@ -1,5 +1,6 @@
 from database import engine, Base
 from models.dataset import Dataset, DataElement, DataValue
+from models.organization_unit import OrganizationUnit, Period, Indicator
 
 def create_tables():
     """Create all tables in the database"""

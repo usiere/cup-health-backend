@@ -17,7 +17,26 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:5175",
+        "http://localhost:5176",
+        "http://localhost:5177",
+        "http://localhost:5178",
+        "http://localhost:5179",
+        "http://localhost:5180",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
+        "http://127.0.0.1:5175",
+        "http://127.0.0.1:5176",
+        "http://127.0.0.1:5177",
+        "http://127.0.0.1:5178",
+        "http://127.0.0.1:5179",
+        "http://127.0.0.1:5180"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,6 +54,9 @@ async def health_check():
 
 # Include routers
 from routers import auth, dhis2, queries, insights
+
+# Import NLG models to ensure they're created
+from models import nlg_optimized
 
 app.include_router(auth.router, prefix="/api/auth", tags=["authentication"])
 app.include_router(dhis2.router, prefix="/api/dhis2", tags=["dhis2"])
